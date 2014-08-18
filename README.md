@@ -4,11 +4,11 @@
 
 > Tedium is built using generators, and therefore requires `node >= 0.11.x`. If you need a Tedious wrapper using the traditional callback style, try [node-mssql](https://github.com/patriksimek/node-mssql). It's also a great library and there is a co-ified version of it as well.
 
-__Tedium is a work in progress. Expect there to be some problems and missing features...___
-
-    npm install tedium
+__Tedium is a work in progress. Expect there to be some problems and missing features...__
 
 ## Usage
+
+    npm install tedium
 
 First create a connection pool. The `tediousOptions` are exactly the same as the options accepted by the [Tedious Connection](http://pekim.github.io/tedious/api-connection.html) constructor.
 
@@ -41,7 +41,8 @@ The best way to acquire a connection is to use the `.using()` method. Inspired b
 // runs after the code inside the scope function. 
 yield pool.using(function * (db) {
   // select where id = 52
-  var result = yield db.request('select * from MyTable where id = @id', { id: tedium.int(52) });
+  var params = { id: tedium.int(52) };
+  var result = yield db.request('select * from MyTable where id = @id', params);
   console.log('row count: ' + result.rowCount);
   console.log(result.rows);
 });
@@ -55,51 +56,60 @@ var results = yield pool.request(sql, params);
 
 ## Data Types
 
-Tedium supports all of the data types that [Tedious](http://pekim.github.io/tedious/api-datatypes.html) does. Each type is a top level method on the `tedium` object. The last argument is the value of the parameter. Some types accept a length, scale, and/or precision arguments as well. For example, nVarChar which accepts a length argument first, such as `tedium.nVarChar(50, 'this string can be up to 50 chars')` or `tedium.nVarChar('max', 'this could be long...')`.
+Tedium supports all of the data types that [Tedious](http://pekim.github.io/tedious/api-datatypes.html) does. Each type is a top level method on the `tedium` object. The last argument is the value of the parameter. Some types accept a length, scale, and/or precision arguments as well.
+
+For example, nVarChar accepts a length argument first. Such as 
 
 ```js
-Tedium.bit (value)
-Tedium.tinyInt (value)
-Tedium.smallInt (value)
-Tedium.int (value)
-Tedium.bigInt (value)
-Tedium.numeric (precision, scale, value)
-Tedium.decimal (precision, scale, value)
-Tedium.smallMoney (value)
-Tedium.money (value)
+tedium.nVarChar(50, 'this string can be up to 50 chars')
+tedium.nVarChar('max', 'this could be long...')
+```
+
+__Type Signatures:__
+
+```js
+tedium.bit (value)
+tedium.tinyInt (value)
+tedium.smallInt (value)
+tedium.int (value)
+tedium.bigInt (value)
+tedium.numeric (precision, scale, value)
+tedium.decimal (precision, scale, value)
+tedium.smallMoney (value)
+tedium.money (value)
 
 // approximate numerics
-Tedium.float (value)
-Tedium.real (value)
+tedium.float (value)
+tedium.real (value)
 
 // date and time
-Tedium.smallDateTime (value)
-Tedium.dateTime (value)
-Tedium.dateTime2 (scale, value)
-Tedium.dateTimeOffset (scale, value)
-Tedium.time (scale, value)
+tedium.smallDateTime (value)
+tedium.dateTime (value)
+tedium.dateTime2 (scale, value)
+tedium.dateTimeOffset (scale, value)
+tedium.time (scale, value)
 
 // character strings
-Tedium.char (length, value)
-Tedium.varChar (length, value)
-Tedium.text (value)
+tedium.char (length, value)
+tedium.varChar (length, value)
+tedium.text (value)
 
 // unicode strings
-Tedium.nChar (length, value)
-Tedium.nVarChar (length, value)
-Tedium.nText (value)
+tedium.nChar (length, value)
+tedium.nVarChar (length, value)
+tedium.nText (value)
 
 // binary strings
-Tedium.binary (length, value)
-Tedium.varBinary (length, value)
-Tedium.image (value)
+tedium.binary (length, value)
+tedium.varBinary (length, value)
+tedium.image (value)
 
 // other data types
-Tedium.null (value)
-Tedium.tvp (value)
-Tedium.udt (value)
-Tedium.uniqueIdentifier (value)
-Tedium.xml (value)
+tedium.null (value)
+tedium.tvp (value)
+tedium.udt (value)
+tedium.uniqueIdentifier (value)
+tedium.xml (value)
 ```
 
 ## Bulk Load
@@ -110,7 +120,7 @@ Tedium supports SQL Server Bulk Insert.
 yield pool.using(function * (db)
 {
   // pass bulkLoad the name of the table you want to insert into
-  // in this case, we're going to use a temporary table
+  // in this case, we're going to use a temporary table (starts with a #)
   var bulk = db.bulkLoad('#tmpTable');
   
   // add all the columns you need before adding rows
