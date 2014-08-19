@@ -34,7 +34,7 @@ var poolOptions = {
 var pool = yield tedium.createConnectionPool(tediousOptions, poolOptions);
 ```
 
-The best way to acquire a connection is to use the `.using()` method. Inspired by C#'s using-block syntax, a the connection will be automatically released back to the pool when the "scope" function completes. If an exception is thrown inside the scope, the connection is closed instead of returning it to the pool and the exception is re-thrown.
+The best way to acquire a connection is to use the `.using()` method. Inspired by C#'s using-block syntax, the connection will be automatically released back to the pool when the "scope" function completes. If an exception is thrown inside the scope, the connection is closed instead of returning it to the pool and the exception is re-thrown.
 
 ```js
 // you should typically call yield on the .using call so that any code which follows
