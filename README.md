@@ -54,6 +54,12 @@ If you only need the connection open for one request, you can use the `pool#requ
 var results = yield pool.request(sql, params);
 ```
 
+If you want requests to be executed as part of a SQL Batch, you can specify `batch: true` in the third argument to `request()`. Generally you don't want to set this, but there are some instances when it is necessary, such as for running multiple requests on a temporary table or inside a manually managed transaction.
+
+```js
+var results = yield pool.request(sql, params, { batch: true });
+```
+
 ## Data Types
 
 Tedium supports all of the data types that [Tedious](http://pekim.github.io/tedious/api-datatypes.html) does. Each type is a top level method on the `tedium` object. The last argument is the value of the parameter. Some types accept a length, scale, and/or precision arguments as well.
