@@ -2,9 +2,17 @@
 
 [Tedious](https://github.com/pekim/tedious) is a great JavaScript implementation of the TDS protocol for interacting with Microsoft SQL Server, but its API is not particularly application friendly. Tedium gives you a very clean interface which helps you write code both quicker and safer.
 
+* [Usage](#usage)
+* [Data Types](#data-types)
+* [Bulk Load](#bulk-load)
+
 > Tedium is built using generators, and therefore requires `node >= 0.11.x`. If you need a Tedious wrapper using the traditional callback style, try [node-mssql](https://github.com/patriksimek/node-mssql). It's also a great library and there is a co-ified version of it as well.
 
-__Tedium is a work in progress. Expect there to be some problems and missing features...__
+__Tedium is a work in progress. Expect there to be some problems and missing features. Notable missing features:__
+
+* Transactions
+* Output variables
+* Good disconnect options
 
 ## Usage
 
@@ -159,3 +167,22 @@ yield pool.using(function * (db)
   // permanent table.
 });
 ```
+
+Because a common use for bulk load is to insert into a temporary table and then merge into a permanent table, a helper function is provided to generate the merge SQL statement.
+
+```js
+var sql = bulk.getMergeSql('PermanentTable', [ 'id' ], { insert: true, update: true });
+yield db.request(sql, null, { batch: true });
+```
+
+Arguments:
+
+* `targetTable` - the name of the table to merge into.
+* `matchColumns` - the names of the columns to match on which to join the tables. A single string, or an array of strings are permitted.
+* `options`
+    * `insert` - true to generate a `WHEN NOT MATCHED BY TARGET THEN INSERT...` clause.
+    * `update` - true to generate a `WHEN MATCHED THEN UPDATE...` clause.
+
+It's possible that more options will be added in the future. Right now this method only generates simple merge syntax for the most common use cases.
+
+> The merge request must be performed on the same db connection as the bulk insert, and with the `batch: true` option set.
