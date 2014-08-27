@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "coback": "^1.0.0",
-    "tedious": "^1.3.3"
+    "tedious": "^1.4.2"
   },
   "keywords": [
     "sql",
