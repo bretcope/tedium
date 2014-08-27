@@ -3,6 +3,10 @@
 [Tedious](https://github.com/pekim/tedious) is a great JavaScript implementation of the TDS protocol for interacting with Microsoft SQL Server, but its API is not particularly application friendly. Tedium gives you a very clean interface which helps you write code both quicker and safer.
 
 * [Usage](#usage)
+    * [Install](#install)
+    * [Connection Pool Setup](#connection-pool-setup)
+    * [Making Requests](#making-requests)
+    * [Transactions](#transactions)
 * [Data Types](#data-types)
 * [Bulk Load](#bulk-load)
 
@@ -16,7 +20,11 @@ __Tedium is a work in progress. Expect there to be some problems and missing fea
 
 ## Usage
 
+### Install
+
     npm install tedium
+
+### Connection Pool Setup
 
 First create a connection pool. The `tediousOptions` are exactly the same as the options accepted by the [Tedious Connection](http://pekim.github.io/tedious/api-connection.html) constructor.
 
@@ -41,6 +49,8 @@ var poolOptions = {
 
 var pool = yield tedium.createConnectionPool(tediousOptions, poolOptions);
 ```
+
+### Making Requests
 
 The best way to acquire a connection is to use the `.using()` method. Inspired by C#'s using-block syntax, the connection will be automatically released back to the pool when the "scope" function completes. If an exception is thrown inside the scope, the connection is closed instead of returning it to the pool and the exception is re-thrown.
 
@@ -67,6 +77,30 @@ If you want requests to be executed as part of a SQL Batch, you can specify `bat
 ```js
 var results = yield pool.request(sql, params, { batch: true });
 ```
+
+### Transactions
+
+Transactions can be acquired in a similar way as a connection.
+
+```js
+yield pool.usingTransaction(function * (t) {
+  yield t.request(sql, params);
+  yield.commit();
+});
+```
+
+If `.commit()` or `.rollback()` are not called (and yielded on), or an error is thrown, then the transaction will be rolled back automatically.
+
+`usingTransaction([isolationLevel,] [name,] scope)` is a function on both Connection and ConnectionPool objects.
+ 
+* `isolationLevel` (optional) Defaults to `tediousOptions.options.isolationLevel`, or `READ_COMMITTED` if not provided. One of:
+    * `Tedium.READ_UNCOMMITTED`
+    * `Tedium.READ_COMMITTED`
+    * `Tedium.REPEATABLE_READ`
+    * `Tedium.SERIALIZABLE`
+    * `Tedium.SNAPSHOT`
+* `name` (optional) The name of the transaction.
+* `scope` A generator function which will be passed the transaction object.
 
 ## Data Types
 
