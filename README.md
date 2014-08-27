@@ -14,7 +14,6 @@
 
 __Tedium is a work in progress. Expect there to be some problems and missing features. Notable missing features:__
 
-* Transactions
 * Output variables
 * Good disconnect options
 
