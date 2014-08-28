@@ -12,6 +12,10 @@ Tedium is being versioned using [FerVer](https://github.com/jonathanong/ferver) 
 
 ### 1.0.x
 
+* 1.0.6
+    * Added `TdmTransaction#bulkLoad()` shortcut method.
+* 1.0.5
+    * Added Transaction support.
 * 1.0.4
     * Added `TdmBulkLoad#getMergeSql()`.
 * 1.0.3
