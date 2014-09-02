@@ -12,7 +12,9 @@ Tedium is being versioned using [FerVer](https://github.com/jonathanong/ferver) 
 
 ### 1.1.x
 
-* [1.1.2](https://github.com/bretcope/tedium/releases/tag/v1.1.1)
+* [1.1.3](https://github.com/bretcope/tedium/releases/tag/v1.1.3)
+    * Reset connections when shifting on to the pending queue. [e0e7e90](https://github.com/bretcope/tedium/commit/e0e7e90b53fc6d32caffb828de0c47913b280ed3)
+* [1.1.2](https://github.com/bretcope/tedium/releases/tag/v1.1.2)
     * Reset connections when returning to the connection pool. [6971a7f](https://github.com/bretcope/tedium/commit/6971a7fd5375d8226cf05ecedca2bd8b5f969f46)
 * [1.1.1](https://github.com/bretcope/tedium/releases/tag/v1.1.1)
     * Make using methods return the result from the scope function. [b2a2e22](https://github.com/bretcope/tedium/commit/b2a2e2273aa6bc83ab3cd9b9c3395ba5899c6969)
