@@ -10,6 +10,14 @@ Tedium is being versioned using [FerVer](https://github.com/jonathanong/ferver) 
 
 ## 1.x.x
 
+### 1.1.x
+
+* 1.1.1
+    * Make using methods return the result from the scope function. [b2a2e22](https://github.com/bretcope/tedium/commit/b2a2e2273aa6bc83ab3cd9b9c3395ba5899c6969)
+    * Added optional context argument to `using` methods. [#1](https://github.com/bretcope/tedium/pull/1)
+* 1.1.0
+    * Support multiple result sets. [e06b256](https://github.com/bretcope/tedium/commit/e06b25626160077267c79aefe0396b7a690ed783)
+
 ### 1.0.x
 
 * 1.0.6
