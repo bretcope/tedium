@@ -12,25 +12,25 @@ Tedium is being versioned using [FerVer](https://github.com/jonathanong/ferver) 
 
 ### 1.1.x
 
-* [1.1.1](https://github.com/bretcope/tedium/tree/v1.1.1)
+* [1.1.1](https://github.com/bretcope/tedium/releases/tag/v1.1.1)
     * Make using methods return the result from the scope function. [b2a2e22](https://github.com/bretcope/tedium/commit/b2a2e2273aa6bc83ab3cd9b9c3395ba5899c6969)
     * Added optional context argument to `using` methods. [#1](https://github.com/bretcope/tedium/pull/1)
-* [1.1.0](https://github.com/bretcope/tedium/tree/v1.1.0)
+* [1.1.0](https://github.com/bretcope/tedium/releases/tag/v1.1.0)
     * Support multiple result sets. [e06b256](https://github.com/bretcope/tedium/commit/e06b25626160077267c79aefe0396b7a690ed783)
 
 ### 1.0.x
 
-* [1.0.6](https://github.com/bretcope/tedium/tree/v1.0.6)
+* [1.0.6](https://github.com/bretcope/tedium/releases/tag/v1.0.6)
     * Added `TdmTransaction#bulkLoad()` shortcut method.
-* [1.0.5](https://github.com/bretcope/tedium/tree/v1.0.5)
+* [1.0.5](https://github.com/bretcope/tedium/releases/tag/v1.0.5)
     * Added Transaction support.
-* [1.0.4](https://github.com/bretcope/tedium/tree/v1.0.4)
+* [1.0.4](https://github.com/bretcope/tedium/releases/tag/v1.0.4)
     * Added `TdmBulkLoad#getMergeSql()`.
-* [1.0.3](https://github.com/bretcope/tedium/tree/v1.0.3)
+* [1.0.3](https://github.com/bretcope/tedium/releases/tag/v1.0.3)
     * _No code changes._
-* [1.0.2](https://github.com/bretcope/tedium/tree/v1.0.2)
+* [1.0.2](https://github.com/bretcope/tedium/releases/tag/v1.0.2)
     * Expose Tedious isolation levels.
-* [1.0.1](https://github.com/bretcope/tedium/tree/v1.0.1)
+* [1.0.1](https://github.com/bretcope/tedium/releases/tag/v1.0.1)
     * Added `Tedium.parseConnectionString()`.
 * 1.0.0
     * Initial library version.
