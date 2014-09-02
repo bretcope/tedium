@@ -77,6 +77,16 @@ If you want requests to be executed as part of a SQL Batch, you can specify `bat
 var results = yield pool.request(sql, params, { batch: true });
 ```
 
+If you need to return multiple result sets from your SQL Query, you can specify `multiple: true` in the third argument to `request()`. In this case, the `rows` property of the returned results will be an array of arrays of rows, rather than just a single array of rows.
+
+```js
+var results = yield pool.request(sql, params, { multiple: true });
+
+var firstSet = results.rows[0];
+var secondSet = results.rows[1];
+// etc...
+```
+
 ### Transactions
 
 Transactions can be acquired in a similar way as a connection.
