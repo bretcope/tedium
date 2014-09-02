@@ -1,7 +1,7 @@
 {
   "name": "tedium",
   "description": "A generator-based wrapper for Tedious to make it easier to work with.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Bret Copeland <bret@atlantisflight.org>",
   "main": "./lib/Tedium.js",
   "repository": {
