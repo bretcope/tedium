@@ -12,6 +12,8 @@ Tedium is being versioned using [FerVer](https://github.com/jonathanong/ferver) 
 
 ### 1.1.x
 
+* [1.1.4](https://github.com/bretcope/tedium/releases/tag/v1.1.4)
+    * Don't rollback transactions twice. [4f702b7](https://github.com/bretcope/tedium/commit/4f702b71a12bc9bf28a2d323deb9f3c24b1deee5)
 * [1.1.3](https://github.com/bretcope/tedium/releases/tag/v1.1.3)
     * Reset connections when shifting on to the pending queue. [e0e7e90](https://github.com/bretcope/tedium/commit/e0e7e90b53fc6d32caffb828de0c47913b280ed3)
 * [1.1.2](https://github.com/bretcope/tedium/releases/tag/v1.1.2)
